@@ -1,0 +1,1514 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#102747">
+<title>Modern Education School | Official Website</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+:root {
+  --navy:#102747;
+  --blue:#20569b;
+  --gold:#d9ae54;
+  --light:#f3f6fb;
+  --white:#ffffff;
+  --text:#26364b;
+  --muted:#718096;
+  --border:#e3e9f1;
+  --shadow:0 12px 35px rgba(16,39,71,.09);
+}
+
+* {box-sizing:border-box;margin:0;padding:0}
+
+body {
+  font-family:Arial,Helvetica,sans-serif;
+  background:var(--light);
+  color:var(--text);
+  line-height:1.6;
+}
+
+button,input,select {font:inherit}
+button {cursor:pointer}
+
+.topbar {
+  background:#0b1d35;
+  color:#dce6f3;
+  padding:8px 6%;
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  flex-wrap:wrap;
+  font-size:12px;
+}
+
+header {
+  background:white;
+  position:sticky;
+  top:0;
+  z-index:100;
+  box-shadow:0 3px 18px #10274712;
+}
+
+.header-inner {
+  max-width:1350px;
+  margin:auto;
+  padding:14px 5%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+}
+
+.brand {
+  display:flex;
+  align-items:center;
+  gap:13px;
+  cursor:pointer;
+}
+
+.logo {
+  width:64px;
+  height:64px;
+  flex-shrink:0;
+}
+
+.brand h1 {
+  color:var(--navy);
+  font-size:19px;
+  font-weight:900;
+  letter-spacing:.5px;
+  line-height:1.3;
+}
+
+.brand p {
+  font-size:11px;
+  color:#9b7938;
+  font-weight:700;
+  letter-spacing:2px;
+}
+
+nav {
+  display:flex;
+  align-items:center;
+  gap:5px;
+  flex-wrap:wrap;
+}
+
+nav button {
+  background:transparent;
+  border:0;
+  padding:10px 12px;
+  color:#35465d;
+  font-weight:700;
+  font-size:13px;
+  border-radius:7px;
+}
+
+nav button:hover,
+nav button.active {
+  color:var(--blue);
+  background:#edf3fb;
+}
+
+nav .login-btn {
+  background:var(--navy);
+  color:white;
+  padding:11px 18px;
+}
+
+nav .login-btn:hover {
+  background:var(--blue);
+  color:white;
+}
+
+.menu-toggle {
+  display:none;
+  background:var(--navy);
+  color:white;
+  border:0;
+  border-radius:7px;
+  padding:9px 13px;
+}
+
+main {
+  max-width:1350px;
+  margin:30px auto;
+  padding:0 5%;
+}
+
+.page {display:none}
+.page.active {display:block;animation:appear .3s ease}
+
+@keyframes appear {
+  from {opacity:0;transform:translateY(7px)}
+  to {opacity:1;transform:translateY(0)}
+}
+
+/* HOMEPAGE */
+
+.hero {
+  min-height:410px;
+  border-radius:19px;
+  overflow:hidden;
+  background:
+    linear-gradient(90deg,rgba(9,29,57,.97),rgba(15,48,85,.85)),
+    url("https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=1600&q=80");
+  background-position:center;
+  background-size:cover;
+  display:flex;
+  align-items:center;
+  padding:55px;
+  color:white;
+  box-shadow:var(--shadow);
+}
+
+.hero-content {max-width:700px}
+
+.hero-label {
+  color:#f1cb79;
+  font-size:12px;
+  letter-spacing:3px;
+  font-weight:800;
+  text-transform:uppercase;
+}
+
+.hero h2 {
+  font-size:clamp(34px,5vw,57px);
+  line-height:1.13;
+  margin:17px 0;
+  font-weight:900;
+}
+
+.hero p {
+  color:#dce7f5;
+  font-size:16px;
+  max-width:580px;
+  margin-bottom:25px;
+}
+
+.btn {
+  display:inline-block;
+  padding:12px 20px;
+  border-radius:7px;
+  border:0;
+  font-weight:700;
+  text-decoration:none;
+}
+
+.btn-gold {
+  background:var(--gold);
+  color:#172b46;
+}
+
+.btn-white {
+  background:white;
+  color:var(--navy);
+  margin-left:8px;
+}
+
+.section-heading {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+  margin:36px 0 18px;
+}
+
+.section-heading h2 {
+  color:var(--navy);
+  font-size:24px;
+}
+
+.section-heading p {
+  color:var(--muted);
+  font-size:13px;
+}
+
+.quick-grid {
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:17px;
+}
+
+.quick-card {
+  background:white;
+  padding:23px;
+  border:1px solid var(--border);
+  border-radius:13px;
+  transition:.2s;
+  box-shadow:0 5px 20px #10274708;
+}
+
+.quick-card:hover {
+  transform:translateY(-4px);
+  box-shadow:var(--shadow);
+}
+
+.quick-icon {
+  width:48px;
+  height:48px;
+  background:#edf3fb;
+  color:var(--blue);
+  display:grid;
+  place-items:center;
+  border-radius:12px;
+  font-size:22px;
+  margin-bottom:15px;
+}
+
+.quick-card h3 {
+  color:var(--navy);
+  font-size:16px;
+  margin-bottom:7px;
+}
+
+.quick-card p {
+  color:var(--muted);
+  font-size:13px;
+  margin-bottom:14px;
+}
+
+.text-link {
+  color:var(--blue);
+  border:0;
+  background:none;
+  font-weight:800;
+  font-size:13px;
+}
+
+/* GENERAL SECTIONS */
+
+.panel {
+  background:white;
+  padding:25px;
+  border:1px solid var(--border);
+  border-radius:13px;
+  margin-bottom:20px;
+  box-shadow:0 5px 20px #10274706;
+}
+
+.page-title {
+  background:var(--navy);
+  color:white;
+  padding:30px;
+  border-radius:13px;
+  margin-bottom:22px;
+}
+
+.page-title h2 {font-size:28px}
+.page-title p {color:#d1dfef;font-size:14px}
+
+.form-grid {
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:17px;
+}
+
+.field {
+  display:flex;
+  flex-direction:column;
+  gap:7px;
+}
+
+.field label {
+  font-size:13px;
+  font-weight:750;
+  color:#34465e;
+}
+
+.field input,
+.field select {
+  padding:12px;
+  border:1px solid #ccd6e3;
+  border-radius:7px;
+  outline:none;
+  background:white;
+  width:100%;
+}
+
+.field input:focus,
+.field select:focus {
+  border-color:var(--blue);
+  box-shadow:0 0 0 3px #20569b16;
+}
+
+.primary {
+  padding:12px 20px;
+  background:var(--navy);
+  color:white;
+  border:0;
+  border-radius:7px;
+  font-weight:750;
+}
+
+.primary:hover {background:var(--blue)}
+
+.secondary {
+  padding:11px 17px;
+  background:#edf3fb;
+  color:var(--navy);
+  border:1px solid #d9e3f0;
+  border-radius:7px;
+  font-weight:700;
+}
+
+.actions {
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-top:19px;
+}
+
+.message {
+  margin-top:15px;
+  font-size:13px;
+  color:var(--muted);
+}
+
+.empty {
+  text-align:center;
+  padding:35px 15px;
+  color:var(--muted);
+  background:#f8fafd;
+  border-radius:9px;
+  font-size:14px;
+}
+
+.notice {
+  padding:14px;
+  background:#f0f5fc;
+  border-left:4px solid var(--blue);
+  border-radius:6px;
+  margin-bottom:18px;
+  font-size:13px;
+}
+
+/* RESULT AND DASHBOARD */
+
+.option-grid {
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:18px;
+}
+
+.option-card {
+  padding:25px;
+  background:white;
+  border:1px solid var(--border);
+  border-radius:12px;
+}
+
+.option-card h3 {
+  color:var(--navy);
+  margin-bottom:8px;
+}
+
+.option-card p {
+  font-size:13px;
+  color:var(--muted);
+  margin-bottom:16px;
+}
+
+/* CAMERA */
+
+video {
+  max-width:100%;
+  width:420px;
+  border-radius:10px;
+  background:#172b46;
+}
+
+.preview {
+  width:150px;
+  border-radius:10px;
+  margin-top:12px;
+}
+
+/* TABLE */
+
+.table-wrap {overflow-x:auto}
+table {width:100%;border-collapse:collapse;font-size:13px}
+th,td {padding:12px;text-align:left;border-bottom:1px solid var(--border)}
+th {background:#f1f5fa;color:var(--navy)}
+
+/* FOOTER */
+
+footer {
+  background:#0b1d35;
+  color:#d6e1ef;
+  margin-top:65px;
+  padding:45px 6% 20px;
+}
+
+.footer-grid {
+  max-width:1250px;
+  margin:auto;
+  display:grid;
+  grid-template-columns:2fr 1fr 1fr;
+  gap:35px;
+}
+
+footer h3 {color:white;margin-bottom:12px}
+footer p,footer button {
+  color:#b9c9dc;
+  font-size:13px;
+  line-height:1.8;
+}
+
+footer button {
+  background:none;
+  border:0;
+  display:block;
+  cursor:pointer;
+  padding:3px 0;
+}
+
+.copyright {
+  text-align:center;
+  border-top:1px solid #ffffff20;
+  margin-top:30px;
+  padding-top:17px;
+  font-size:12px;
+  color:#a8bbd2;
+}
+
+.hidden {display:none!important}
+
+@media(max-width:1000px) {
+  .quick-grid {grid-template-columns:repeat(2,1fr)}
+  nav {gap:1px}
+  nav button {padding:8px}
+}
+
+@media(max-width:720px) {
+  .header-inner {flex-wrap:wrap}
+  .menu-toggle {display:block}
+  nav {
+    display:none;
+    width:100%;
+    flex-direction:column;
+    align-items:stretch;
+  }
+  nav.open {display:flex}
+  nav button {text-align:left;padding:12px}
+  .brand h1 {font-size:15px}
+  .logo {width:51px;height:51px}
+  .hero {padding:30px 23px;min-height:360px}
+  .quick-grid,.option-grid,.form-grid {grid-template-columns:1fr}
+  .footer-grid {grid-template-columns:1fr}
+  main {padding:0 4%}
+  .btn-white {margin:10px 0 0}
+}
+</style>
+</head>
+
+<body>
+
+<div class="topbar">
+  <span>MODERN EDUCATION SCHOOL</span>
+  <span>Official School Website &nbsp; | &nbsp; Student Services</span>
+</div>
+
+<header>
+<div class="header-inner">
+
+  <div class="brand" onclick="showPage('home')">
+
+    <!-- ORIGINAL SCHOOL EMBLEM -->
+    <svg class="logo" viewBox="0 0 100 100"
+         xmlns="http://www.w3.org/2000/svg">
+      <path d="M50 4 L88 19 V48 Q84 77 50 96
+               Q16 77 12 48 V19 Z"
+            fill="#102747" stroke="#d9ae54" stroke-width="4"/>
+      <path d="M24 32 L50 22 L76 32 L50 42 Z"
+            fill="#d9ae54"/>
+      <path d="M29 36 V55 Q50 65 71 55 V36
+               Q50 47 29 36Z"
+            fill="white"/>
+      <path d="M50 42 V63" stroke="#d9ae54" stroke-width="2"/>
+      <path d="M50 17 V10" stroke="#d9ae54" stroke-width="3"/>
+      <text x="50" y="79" font-size="12" text-anchor="middle"
+            fill="white" font-weight="bold">ME</text>
+    </svg>
+
+    <div>
+      <h1>MODERN EDUCATION SCHOOL</h1>
+      <p>LEARN • GROW • EXCEL</p>
+    </div>
+  </div>
+
+  <button class="menu-toggle" onclick="toggleMenu()">☰ MENU</button>
+
+  <nav id="navigation">
+    <button class="active" onclick="showPage('home',this)">Home</button>
+    <button onclick="showPage('circulars',this)">Circulars</button>
+    <button onclick="showPage('academics',this)">Academics</button>
+    <button onclick="showPage('results',this)">Exam Results</button>
+    <button onclick="showPage('admission',this)">Admission Desk</button>
+    <button class="login-btn" onclick="showPage('login',this)">Portal Login</button>
+  </nav>
+
+</div>
+</header>
+
+<main>
+
+<!-- HOME -->
+
+<section id="home" class="page active">
+
+<div class="hero">
+ <div class="hero-content">
+  <span class="hero-label">WELCOME TO OUR SCHOOL</span>
+  <h2>Building Knowledge.<br>Shaping Tomorrow.</h2>
+  <p>
+    Welcome to Modern Education School.
+    Access official circulars, academic resources,
+    examination information and student services
+    through our school portal.
+  </p>
+  <button class="btn btn-gold" onclick="showPage('academics')">
+    Explore Academics
+  </button>
+  <button class="btn btn-white" onclick="showPage('admission')">
+    Admission Desk
+  </button>
+ </div>
+</div>
+
+<div class="section-heading">
+ <div>
+  <h2>Quick Access</h2>
+  <p>Access important school services.</p>
+ </div>
+</div>
+
+<div class="quick-grid">
+
+ <div class="quick-card">
+  <div class="quick-icon">📢</div>
+  <h3>School Circulars</h3>
+  <p>Read official school notifications and uploaded circulars.</p>
+  <button class="text-link" onclick="showPage('circulars')">View Circulars →</button>
+ </div>
+
+ <div class="quick-card">
+  <div class="quick-icon">📚</div>
+  <h3>Academics</h3>
+  <p>Find class-wise, section-wise and subject-wise question papers.</p>
+  <button class="text-link" onclick="showPage('academics')">Explore Academics →</button>
+ </div>
+
+ <div class="quick-card">
+  <div class="quick-icon">📊</div>
+  <h3>Examination Results</h3>
+  <p>Access examination results after official publication.</p>
+  <button class="text-link" onclick="showPage('results')">View Results →</button>
+ </div>
+
+ <div class="quick-card">
+  <div class="quick-icon">🎓</div>
+  <h3>Student Dashboard</h3>
+  <p>Access student services through secure login.</p>
+  <button class="text-link" onclick="showPage('login')">Student Login →</button>
+ </div>
+
+</div>
+
+<div class="section-heading">
+ <h2>Latest Updates</h2>
+</div>
+
+<div class="panel">
+ <div id="latestUpdates" class="empty">No circulars found.</div>
+</div>
+
+</section>
+
+
+<!-- CIRCULARS -->
+
+<section id="circulars" class="page">
+ <div class="page-title">
+  <h2>School Circulars</h2>
+  <p>Official notifications issued by Modern Education School.</p>
+ </div>
+
+ <div class="panel">
+  <div id="circularList" class="empty">No circulars found.</div>
+ </div>
+</section>
+
+
+<!-- ACADEMICS -->
+
+<section id="academics" class="page">
+ <div class="page-title">
+  <h2>Academic Resources</h2>
+  <p>Class-wise and subject-wise academic question papers.</p>
+ </div>
+
+ <div class="panel">
+  <h3>Find Question Papers</h3>
+  <br>
+
+  <div class="form-grid">
+
+   <div class="field">
+    <label>Select Class</label>
+    <select id="paperClass"></select>
+   </div>
+
+   <div class="field">
+    <label>Select Section</label>
+    <select id="paperSection"></select>
+   </div>
+
+   <div class="field">
+    <label>Select Subject</label>
+    <select id="paperSubject"></select>
+   </div>
+
+   <div class="field">
+    <label>Academic Session</label>
+    <input id="paperSession" placeholder="2026-27">
+   </div>
+
+  </div>
+
+  <div class="actions">
+   <button class="primary" onclick="findPapers()">Search Question Papers</button>
+  </div>
+
+  <div id="paperResults" class="message">Not Found</div>
+ </div>
+</section>
+
+
+<!-- RESULTS -->
+
+<section id="results" class="page">
+
+ <div class="page-title">
+  <h2>Examination Results</h2>
+  <p>Official examination result portal.</p>
+ </div>
+
+ <div class="option-grid">
+
+  <div class="option-card">
+   <h3>Grades IV – IX</h3>
+   <p>Enter Student ID, Class and Section.</p>
+   <button class="primary" onclick="openResult('junior')">
+    Open Result Portal
+   </button>
+  </div>
+
+  <div class="option-card">
+   <h3>Grades X – XII</h3>
+   <p>Enter Board Number, Student ID, Section and Class.</p>
+   <button class="primary" onclick="openResult('senior')">
+    Open Result Portal
+   </button>
+  </div>
+
+ </div>
+
+ <div id="resultPanel" class="panel hidden" style="margin-top:20px"></div>
+
+</section>
+
+
+<!-- ADMISSION DESK -->
+
+<section id="admission" class="page">
+
+ <div class="page-title">
+  <h2>Admission Desk</h2>
+  <p>Admission applications and application status.</p>
+ </div>
+
+ <div class="option-grid">
+
+  <div class="option-card">
+   <h3>New Admission Application</h3>
+   <p>Apply for admission and submit the required information.</p>
+   <button class="primary" onclick="showPage('apply')">
+    Apply Now
+   </button>
+  </div>
+
+  <div class="option-card">
+   <h3>Check Application Status</h3>
+   <p>Check application verification and examination roll number.</p>
+   <button class="primary" onclick="showPage('status')">
+    Check Status
+   </button>
+  </div>
+
+ </div>
+
+</section>
+
+
+<!-- APPLICATION FORM -->
+
+<section id="apply" class="page">
+
+ <div class="page-title">
+  <h2>Admission Application Form</h2>
+  <p>Submit the applicant's information.</p>
+ </div>
+
+ <div class="panel">
+
+  <div class="notice">
+   All individual admission applications are managed exclusively
+   by the assigned Nodal Officer. The Administrator has no
+   individual admission-processing authority.
+  </div>
+
+  <form id="admissionForm">
+
+   <div class="form-grid">
+
+    <div class="field">
+     <label>Student Name</label>
+     <input name="student_name" required maxlength="100">
+    </div>
+
+    <div class="field">
+     <label>Father's Name</label>
+     <input name="father_name" required maxlength="100">
+    </div>
+
+    <div class="field">
+     <label>Mother's Name</label>
+     <input name="mother_name" required maxlength="100">
+    </div>
+
+    <div class="field">
+     <label>Date of Birth</label>
+     <input name="dob" type="date" required>
+    </div>
+
+    <div class="field">
+     <label>Previous Class</label>
+     <select name="previous_class" id="previousClass"></select>
+    </div>
+
+    <div class="field">
+     <label>Previous Class Percentage</label>
+     <input name="previous_percentage" type="number" min="0" max="100" step=".01">
+    </div>
+
+    <div class="field">
+     <label>Applying For Class</label>
+     <select name="applying_for" id="applyingFor" required></select>
+    </div>
+
+    <div class="field">
+     <label>Parent/Guardian Email</label>
+     <input name="guardian_email" type="email" required>
+    </div>
+
+   </div>
+
+   <div class="panel" style="margin-top:25px">
+
+    <h3>Student Live Photograph</h3>
+    <p class="message">Allow camera permission to capture a current photograph.</p>
+
+    <video id="camera" autoplay playsinline class="hidden"></video>
+    <canvas id="canvas" class="hidden"></canvas>
+
+    <div class="actions">
+     <button type="button" class="secondary" onclick="startCamera()">
+      Open Camera
+     </button>
+     <button type="button" class="secondary" onclick="capturePhoto()">
+      Capture Photo
+     </button>
+    </div>
+
+    <img id="photoPreview" class="preview hidden" alt="Student photograph">
+    <p id="cameraMessage" class="message"></p>
+
+   </div>
+
+   <div class="actions">
+    <button type="submit" class="primary">Submit Application</button>
+   </div>
+
+   <p id="admissionMessage" class="message"></p>
+
+  </form>
+ </div>
+</section>
+
+
+<!-- STATUS -->
+
+<section id="status" class="page">
+
+ <div class="page-title">
+  <h2>Application Status</h2>
+  <p>Check your admission application.</p>
+ </div>
+
+ <div class="panel">
+
+  <form id="statusForm">
+
+   <div class="field">
+    <label>Application Reference</label>
+    <input name="reference" required>
+   </div>
+
+   <br>
+
+   <div class="field">
+    <label>Date of Birth</label>
+    <input name="dob" type="date" required>
+   </div>
+
+   <div class="actions">
+    <button class="primary">Check Status</button>
+   </div>
+
+  </form>
+
+  <div id="statusResult" class="message"></div>
+
+ </div>
+</section>
+
+
+<!-- LOGIN -->
+
+<section id="login" class="page">
+
+ <div class="page-title">
+  <h2>Secure Portal Login</h2>
+  <p>Authorized access for students, staff and administrators.</p>
+ </div>
+
+ <div class="panel" style="max-width:550px;margin:auto">
+
+  <form id="loginForm">
+
+   <div class="field">
+    <label>User ID / Email</label>
+    <input name="identity" required autocomplete="username">
+   </div>
+
+   <br>
+
+   <div class="field">
+    <label>Password</label>
+    <input name="password" type="password" required autocomplete="current-password">
+   </div>
+
+   <div class="actions">
+    <button class="primary">Sign In</button>
+   </div>
+
+  </form>
+
+  <p id="loginMessage" class="message"></p>
+  <div id="dashboard" class="hidden"></div>
+
+ </div>
+</section>
+
+</main>
+
+
+<footer>
+
+ <div class="footer-grid">
+
+  <div>
+   <h3>Modern Education School</h3>
+   <p>
+    Official school website and academic portal.
+    Providing access to academic information,
+    examination services and school notifications.
+   </p>
+  </div>
+
+  <div>
+   <h3>Quick Links</h3>
+   <button onclick="showPage('home')">Home</button>
+   <button onclick="showPage('circulars')">Circulars</button>
+   <button onclick="showPage('academics')">Academics</button>
+  </div>
+
+  <div>
+   <h3>Student Services</h3>
+   <button onclick="showPage('results')">Examination Results</button>
+   <button onclick="showPage('admission')">Admission Desk</button>
+   <button onclick="showPage('login')">Portal Login</button>
+  </div>
+
+ </div>
+
+ <div class="copyright">
+  © <span id="year"></span> Modern Education School. All Rights Reserved.
+ </div>
+
+</footer>
+
+
+<script>
+
+/* BACKEND CONFIGURATION */
+
+const SUPABASE_URL = "PASTE_YOUR_SUPABASE_PROJECT_URL";
+const SUPABASE_ANON_KEY = "PASTE_YOUR_SUPABASE_ANON_KEY";
+
+let db = null;
+let cameraStream = null;
+let capturedPhoto = null;
+
+const classes = ["IV","V","VI","VII","VIII","IX","X","XI","XII"];
+
+const subjects = [
+ "HINDI","ENGLISH","MATHS","SCIENCE",
+ "SOCIAL STUDIES","SANSKRIT",
+ "PHYSICS","CHEMISTRY","BIOLOGY",
+ "COMPUTER SCIENCES"
+];
+
+
+/* NAVIGATION */
+
+function showPage(id,button) {
+
+ document.querySelectorAll(".page")
+ .forEach(p=>p.classList.remove("active"));
+
+ document.getElementById(id).classList.add("active");
+
+ document.querySelectorAll("nav button")
+ .forEach(b=>b.classList.remove("active"));
+
+ if(button) button.classList.add("active");
+
+ document.getElementById("navigation").classList.remove("open");
+
+ window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function toggleMenu() {
+ document.getElementById("navigation").classList.toggle("open");
+}
+
+
+/* DROPDOWNS */
+
+function fillSelect(id,values) {
+
+ const el=document.getElementById(id);
+ el.innerHTML="";
+
+ values.forEach(value=>{
+  const option=document.createElement("option");
+  option.value=value;
+  option.textContent=value;
+  el.appendChild(option);
+ });
+
+}
+
+function getSections(className) {
+
+ const count=["XI","XII"].includes(className)?18:11;
+
+ return Array.from({length:count},(_,i)=>
+  String.fromCharCode(65+i)
+ );
+
+}
+
+function updateSections() {
+
+ const cls=document.getElementById("paperClass").value;
+
+ fillSelect("paperSection",getSections(cls));
+
+}
+
+
+/* INITIALIZATION */
+
+function initialize() {
+
+ document.getElementById("year").textContent=
+ new Date().getFullYear();
+
+ fillSelect("paperClass",classes);
+
+ fillSelect("previousClass",
+ ["III","IV","V","VI","VII","VIII","IX","X","XI"]);
+
+ fillSelect("applyingFor",classes);
+
+ fillSelect("paperSubject",subjects);
+
+ updateSections();
+
+ document.getElementById("paperClass")
+ .addEventListener("change",updateSections);
+
+ if(window.supabase &&
+ SUPABASE_URL.startsWith("https://") &&
+ !SUPABASE_ANON_KEY.startsWith("PASTE_")) {
+
+  db=window.supabase.createClient(
+   SUPABASE_URL,
+   SUPABASE_ANON_KEY
+  );
+
+  loadCirculars();
+ }
+
+}
+
+
+/* CIRCULARS */
+
+async function loadCirculars() {
+
+ if(!db) return;
+
+ const {data,error}=await db
+ .from("circulars")
+ .select("title,pdf_path,created_at")
+ .eq("published",true)
+ .order("created_at",{ascending:false});
+
+ if(error) {
+  console.error(error);
+  return;
+ }
+
+ const list=document.getElementById("circularList");
+ const latest=document.getElementById("latestUpdates");
+
+ if(!data || data.length===0) {
+  list.textContent="No circulars found.";
+  latest.textContent="No circulars found.";
+  return;
+ }
+
+ list.innerHTML=data.map(item=>`
+  <p style="padding:12px;border-bottom:1px solid #e3e9f1">
+   <strong>${escapeHTML(item.title)}</strong>
+   &nbsp; <a target="_blank" rel="noopener"
+   href="${getFileURL(item.pdf_path)}">View PDF</a>
+  </p>
+ `).join("");
+
+ latest.innerHTML=data.slice(0,5).map(item=>`
+  <p style="padding:9px;border-bottom:1px solid #e3e9f1">
+   ${escapeHTML(item.title)}
+  </p>
+ `).join("");
+
+}
+
+
+/* ACADEMICS */
+
+async function findPapers() {
+
+ const output=document.getElementById("paperResults");
+
+ if(!db) {
+  output.textContent="Not Found";
+  return;
+ }
+
+ const cls=document.getElementById("paperClass").value;
+ const section=document.getElementById("paperSection").value;
+ const subject=document.getElementById("paperSubject").value;
+ const session=document.getElementById("paperSession").value;
+
+ let query=db.from("question_papers")
+ .select("title,pdf_path")
+ .eq("class_name",cls)
+ .eq("section_name",section)
+ .eq("subject",subject);
+
+ if(session) query=query.eq("academic_session",session);
+
+ const {data,error}=await query;
+
+ if(error || !data || !data.length) {
+  output.textContent="Not Found";
+  return;
+ }
+
+ output.innerHTML=data.map(p=>`
+  <p style="padding:10px">
+   <strong>${escapeHTML(p.title)}</strong>
+   <a target="_blank" rel="noopener"
+   href="${getFileURL(p.pdf_path)}">Open PDF</a>
+  </p>
+ `).join("");
+
+}
+
+
+/* RESULT SEARCH */
+
+function openResult(type) {
+
+ const panel=document.getElementById("resultPanel");
+
+ panel.classList.remove("hidden");
+
+ let html="";
+
+ if(type==="junior") {
+
+  html=`
+   <h3>Grades IV–IX Result Search</h3>
+   <br>
+   <div class="form-grid">
+    <div class="field">
+     <label>Student ID</label>
+     <input id="studentID">
+    </div>
+    <div class="field">
+     <label>Class</label>
+     <select id="resultClass">
+      ${classes.slice(0,6).map(c=>`<option>${c}</option>`).join("")}
+     </select>
+    </div>
+    <div class="field">
+     <label>Section</label>
+     <select id="resultSection">
+      ${getSections("IV").map(s=>`<option>${s}</option>`).join("")}
+     </select>
+    </div>
+   </div>
+  `;
+
+ } else {
+
+  html=`
+   <h3>Grades X–XII Result Search</h3>
+   <br>
+   <div class="form-grid">
+    <div class="field">
+     <label>Board Number</label>
+     <input id="boardNumber">
+    </div>
+    <div class="field">
+     <label>Student ID</label>
+     <input id="studentID">
+    </div>
+    <div class="field">
+     <label>Section</label>
+     <select id="resultSection">
+      ${getSections("XI").map(s=>`<option>${s}</option>`).join("")}
+     </select>
+    </div>
+    <div class="field">
+     <label>Class</label>
+     <select id="resultClass">
+      ${classes.slice(6).map(c=>`<option>${c}</option>`).join("")}
+     </select>
+    </div>
+   </div>
+  `;
+
+ }
+
+ panel.innerHTML=html+`
+  <div class="actions">
+   <button class="primary" onclick="searchResult()">
+    Search Result
+   </button>
+  </div>
+  <div id="resultOutput" class="message">Not Found</div>
+ `;
+
+}
+
+async function searchResult() {
+
+ document.getElementById("resultOutput").textContent=
+ "Not Found";
+
+ // Connect this action to a secure result-search
+ // backend that checks student identity and publication status.
+
+}
+
+
+/* CAMERA */
+
+async function startCamera() {
+
+ const message=document.getElementById("cameraMessage");
+
+ try {
+
+  cameraStream=await navigator.mediaDevices.getUserMedia({
+   video:{facingMode:"user"},
+   audio:false
+  });
+
+  const video=document.getElementById("camera");
+
+  video.srcObject=cameraStream;
+  video.classList.remove("hidden");
+
+  message.textContent="Camera ready. Capture your photograph.";
+
+ } catch(error) {
+
+  message.textContent=
+  "Camera permission unavailable. Please allow camera access and use HTTPS.";
+
+ }
+
+}
+
+function capturePhoto() {
+
+ if(!cameraStream) {
+  document.getElementById("cameraMessage")
+  .textContent="Open the camera first.";
+  return;
+ }
+
+ const video=document.getElementById("camera");
+ const canvas=document.getElementById("canvas");
+
+ canvas.width=video.videoWidth;
+ canvas.height=video.videoHeight;
+
+ canvas.getContext("2d").drawImage(video,0,0);
+
+ capturedPhoto=canvas.toDataURL("image/jpeg",.85);
+
+ const preview=document.getElementById("photoPreview");
+
+ preview.src=capturedPhoto;
+ preview.classList.remove("hidden");
+
+ document.getElementById("cameraMessage")
+ .textContent="Photograph captured successfully.";
+
+}
+
+
+/* ADMISSION SUBMISSION */
+
+document.getElementById("admissionForm")
+.addEventListener("submit",async function(event) {
+
+ event.preventDefault();
+
+ const message=document.getElementById("admissionMessage");
+
+ if(!db) {
+  message.textContent=
+  "Admission service is not configured.";
+  return;
+ }
+
+ if(!capturedPhoto) {
+  message.textContent="Please capture the live student photograph.";
+  return;
+ }
+
+ const formData=new FormData(this);
+ const photoBlob=await (await fetch(capturedPhoto)).blob();
+
+ const response=await db.functions.invoke(
+  "submit-admission-application",
+  {
+   body:{
+    student_name:formData.get("student_name"),
+    father_name:formData.get("father_name"),
+    mother_name:formData.get("mother_name"),
+    dob:formData.get("dob"),
+    previous_class:formData.get("previous_class"),
+    previous_percentage:formData.get("previous_percentage"),
+    applying_for:formData.get("applying_for"),
+    guardian_email:formData.get("guardian_email"),
+    photo_base64:capturedPhoto
+   }
+  }
+ );
+
+ if(response.error) {
+  message.textContent="Application submission failed.";
+  return;
+ }
+
+ message.textContent=
+ "Application submitted. Reference: "+
+ response.data.application_reference;
+
+ this.reset();
+
+ capturedPhoto=null;
+
+ document.getElementById("photoPreview")
+ .classList.add("hidden");
+
+ if(cameraStream) {
+  cameraStream.getTracks().forEach(track=>track.stop());
+  cameraStream=null;
+ }
+
+});
+
+
+/* APPLICATION STATUS */
+
+document.getElementById("statusForm")
+.addEventListener("submit",async function(event) {
+
+ event.preventDefault();
+
+ const output=document.getElementById("statusResult");
+
+ if(!db) {
+  output.textContent="Not Found";
+  return;
+ }
+
+ const form=new FormData(this);
+
+ const response=await db.functions.invoke(
+  "public-application-status",
+  {
+   body:{
+    reference:form.get("reference"),
+    dob:form.get("dob")
+   }
+  }
+ );
+
+ if(response.error || !response.data) {
+  output.textContent="Not Found";
+  return;
+ }
+
+ const data=response.data;
+
+ output.textContent=
+ "Status: "+data.status+
+ " | Reviewed by Nodal Officer: "+(data.reviewed?"Yes":"No")+
+ " | Roll Number: "+(data.exam_roll_number||"Not assigned");
+
+});
+
+
+/* LOGIN */
+
+document.getElementById("loginForm")
+.addEventListener("submit",async function(event) {
+
+ event.preventDefault();
+
+ const message=document.getElementById("loginMessage");
+
+ if(!db) {
+  message.textContent="Secure login is not configured.";
+  return;
+ }
+
+ const form=new FormData(this);
+
+ const {data,error}=await db.auth.signInWithPassword({
+  email:form.get("identity"),
+  password:form.get("password")
+ });
+
+ if(error) {
+  message.textContent="Login failed. Check your credentials.";
+  return;
+ }
+
+ const profile=await db.from("profiles")
+ .select("full_name,role,active")
+ .eq("id",data.user.id)
+ .single();
+
+ if(profile.error || !profile.data.active) {
+  await db.auth.signOut();
+  message.textContent="Account not active.";
+  return;
+ }
+
+ const dashboard=document.getElementById("dashboard");
+
+ dashboard.classList.remove("hidden");
+
+ dashboard.innerHTML=`
+  <div class="notice" style="margin-top:20px">
+   <strong>Welcome, ${escapeHTML(profile.data.full_name)}</strong>
+   <p>Role: ${escapeHTML(profile.data.role)}</p>
+   <p>Available modules depend on your assigned permissions.</p>
+   <button class="secondary" onclick="logout()">Sign Out</button>
+  </div>
+ `;
+
+ message.textContent="Login successful.";
+
+});
+
+
+async function logout() {
+
+ if(db) await db.auth.signOut();
+
+ document.getElementById("dashboard").classList.add("hidden");
+
+ document.getElementById("loginMessage").textContent=
+ "You have signed out.";
+
+}
+
+
+/* HELPERS */
+
+function escapeHTML(value) {
+
+ return String(value??"").replace(/[&<>"']/g,char=>({
+  "&":"&amp;",
+  "<":"&lt;",
+  ">":"&gt;",
+  '"':"&quot;",
+  "'":"&#39;"
+ }[char]));
+
+}
+
+function getFileURL(path) {
+
+ if(!db) return "#";
+
+ return db.storage.from("school-documents")
+ .getPublicUrl(path).data.publicUrl;
+
+}
+
+initialize();
+
+</script>
+
+</body>
+</html>
